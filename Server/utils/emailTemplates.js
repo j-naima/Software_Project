@@ -1,45 +1,163 @@
 export function generateForgotPasswordEmailTemplate(resetPasswordUrl) {
   return `
-    <div style="font-family: -apple-system, 'Segoe UI', sans-serif; background: #f5f5f4; padding: 40px 20px; min-height: 100vh;">
-      <div style="max-width: 560px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #e7e5e0;">
+    <div style="font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0;">
 
-        <!-- Header -->
-        <div style="background: #0f0f0f; padding: 32px 40px 28px;">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 28px; height: 28px; border-radius: 6px; background: #fff; display: flex; align-items: center; justify-content: center;">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="3" y="7" width="10" height="8" rx="1.5" stroke="#0f0f0f" stroke-width="1.5"/>
-                <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="#0f0f0f" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <span style="color: #ffffff; font-weight: 500; font-size: 15px; letter-spacing: -0.01em;">SWE Lab</span>
-          </div>
+      <!-- Header Banner -->
+      <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); padding: 40px 48px 36px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+          <span style="font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px;">AcadTrack</span>
         </div>
+        <p style="margin: 0; font-size: 13px; color: rgba(255,255,255,0.65); letter-spacing: 0.5px; text-transform: uppercase; font-weight: 500;">Academic Management Platform</p>
+      </div>
 
-        <!-- Body -->
-        <div style="padding: 40px 40px 32px;">
-          <p style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #9ca3af; text-transform: uppercase; margin: 0 0 20px;">Security notice</p>
-          <h1 style="font-size: 22px; font-weight: 500; color: #0f0f0f; margin: 0 0 16px; letter-spacing: -0.02em; line-height: 1.3;">Reset your password</h1>
-          <p style="font-size: 15px; color: #6b7280; margin: 0 0 32px; line-height: 1.7;">
-            We received a request to reset the password for your account. Click the button below — this link expires in <strong style="color: #0f0f0f; font-weight: 500;">30 minutes</strong>.
-          </p>
+      <div style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 20px 48px;">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="width: 44px; vertical-align: middle;">
+              <div style="width: 36px; height: 36px; background: #dbeafe; border-radius: 50%; text-align: center; line-height: 36px; font-size: 18px;">&#128274;</div>
+            </td>
+            <td style="vertical-align: middle; padding-left: 12px;">
+              <p style="margin: 0; font-size: 15px; font-weight: 600; color: #1e293b;">Password Reset Request</p>
+              <p style="margin: 2px 0 0; font-size: 12px; color: #64748b;">This link expires in 15 minutes</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="padding: 40px 48px;">
+        <p style="margin: 0 0 8px; font-size: 17px; font-weight: 600; color: #0f172a;">Hi there,</p>
+        <p style="margin: 0 0 24px; font-size: 15px; line-height: 1.7; color: #475569;">
+          We received a request to reset the password for your AcadTrack account. If you made this request, click the button below to choose a new password.
+        </p>
+
+        <div style="text-align: center; margin: 32px 0;">
           <a href="${resetPasswordUrl}"
-             style="display: inline-block; padding: 12px 28px; background: #0f0f0f; color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 500; letter-spacing: -0.01em;">
-            Reset password →
+             style="display: inline-block; background: #2563eb; color: #ffffff; text-decoration: none; font-size: 15px; font-weight: 600; padding: 14px 36px; border-radius: 10px; letter-spacing: 0.2px;">
+            Reset My Password
           </a>
-          <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #f0eeea;">
-            <p style="font-size: 13px; color: #9ca3af; margin: 0; line-height: 1.6;">
-              Didn't request this? You can safely ignore this email — your password won't change unless you click the link above.
-            </p>
-          </div>
         </div>
 
-        <!-- Footer -->
-        <div style="padding: 20px 40px; border-top: 1px solid #f0eeea; display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-size: 12px; color: #9ca3af;">© 2026 SWE Lab</span>
-          <span style="font-size: 12px; color: #9ca3af;">Sent with care</span>
+        
+        <div style="border-top: 1px solid #f1f5f9; margin: 32px 0;"></div>
+
+        <p style="margin: 0 0 12px; font-size: 14px; color: #64748b; line-height: 1.6;">
+          If the button doesn't work, copy and paste this link into your browser:
+        </p>
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; word-break: break-all;">
+          <a href="${resetPasswordUrl}" style="font-size: 13px; color: #2563eb; text-decoration: none;">${resetPasswordUrl}</a>
         </div>
 
+        <div style="margin-top: 24px; padding: 16px; background: #fefce8; border-left: 3px solid #eab308; border-radius: 0 8px 8px 0;">
+          <p style="margin: 0; font-size: 13px; color: #713f12; line-height: 1.6;">
+            <strong>Didn't request this?</strong> You can safely ignore this email. Your password will remain unchanged.
+          </p>
+        </div>
+      </div>
+
+      <div style="background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 24px 48px; text-align: center;">
+        <p style="margin: 0 0 4px; font-size: 13px; font-weight: 600; color: #334155;">AcadTrack Team</p>
+        <p style="margin: 0; font-size: 12px; color: #94a3b8;">This is an automated message — please do not reply.</p>
+      </div>
+    </div>
+  `;
+}
+
+/* Request Accepted Email */
+
+export function generateRequestAcceptedTemplate(supervisorName) {
+  return `
+    <div style="font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0;">
+
+      <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); padding: 40px 48px 36px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+          <span style="font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px;">AcadTrack</span>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: rgba(255,255,255,0.65); letter-spacing: 0.5px; text-transform: uppercase; font-weight: 500;">Academic Management Platform</p>
+      </div>
+
+      <div style="background: #f0fdf4; border-bottom: 1px solid #bbf7d0; padding: 20px 48px;">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="width: 44px; vertical-align: middle;">
+              <div style="width: 36px; height: 36px; background: #dcfce7; border-radius: 50%; text-align: center; line-height: 36px; font-size: 18px;">&#9989;</div>
+            </td>
+            <td style="vertical-align: middle; padding-left: 12px;">
+              <p style="margin: 0; font-size: 15px; font-weight: 600; color: #14532d;">Request Accepted</p>
+              <p style="margin: 2px 0 0; font-size: 12px; color: #16a34a;">You're ready to get started</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="padding: 40px 48px;">
+        <p style="margin: 0 0 8px; font-size: 17px; font-weight: 600; color: #0f172a;">Great news!</p>
+        <p style="margin: 0 0 24px; font-size: 15px; line-height: 1.7; color: #475569;">
+          Your supervisor request has been accepted by <strong style="color: #0f172a;">${supervisorName}</strong>. You can now begin working on your project and upload your files directly through the platform.
+        </p>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 24px;">
+          <p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;">What's next</p>
+          <ul style="margin: 0; padding: 0 0 0 20px; font-size: 14px; color: #334155; line-height: 2;">
+            <li>Log in to your AcadTrack dashboard</li>
+            <li>Start uploading project files and documents</li>
+            <li>Communicate with your supervisor through the platform</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 24px 48px; text-align: center;">
+        <p style="margin: 0 0 4px; font-size: 13px; font-weight: 600; color: #334155;">AcadTrack Team</p>
+        <p style="margin: 0; font-size: 12px; color: #94a3b8;">This is an automated message — please do not reply.</p>
+      </div>
+    </div>
+  `;
+}
+
+/* Request Rejected Email */
+export function generateRequestRejectedTemplate(supervisorName) {
+  return `
+    <div style="font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0;">
+
+      <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); padding: 40px 48px 36px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+          <span style="font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px;">AcadTrack</span>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: rgba(255,255,255,0.65); letter-spacing: 0.5px; text-transform: uppercase; font-weight: 500;">Academic Management Platform</p>
+      </div>
+
+      <div style="background: #fff7f7; border-bottom: 1px solid #fecaca; padding: 20px 48px;">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="width: 44px; vertical-align: middle;">
+              <div style="width: 36px; height: 36px; background: #fee2e2; border-radius: 50%; text-align: center; line-height: 36px; font-size: 18px;">&#10060;</div>
+            </td>
+            <td style="vertical-align: middle; padding-left: 12px;">
+              <p style="margin: 0; font-size: 15px; font-weight: 600; color: #7f1d1d;">Request Not Accepted</p>
+              <p style="margin: 2px 0 0; font-size: 12px; color: #dc2626;">You may submit a new request</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="padding: 40px 48px;">
+        <p style="margin: 0 0 8px; font-size: 17px; font-weight: 600; color: #0f172a;">We're sorry to inform you,</p>
+        <p style="margin: 0 0 24px; font-size: 15px; line-height: 1.7; color: #475569;">
+          Your supervisor request to <strong style="color: #0f172a;">${supervisorName}</strong> was not accepted at this time. Don't worry — you're free to browse available supervisors and submit a new request.
+        </p>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 24px;">
+          <p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;">What you can do</p>
+          <ul style="margin: 0; padding: 0 0 0 20px; font-size: 14px; color: #334155; line-height: 2;">
+            <li>Browse other available supervisors on the platform</li>
+            <li>Send a new supervisor request</li>
+            <li>Contact support if you need guidance</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 24px 48px; text-align: center;">
+        <p style="margin: 0 0 4px; font-size: 13px; font-weight: 600; color: #334155;">AcadTrack Team</p>
+        <p style="margin: 0; font-size: 12px; color: #94a3b8;">This is an automated message — please do not reply.</p>
       </div>
     </div>
   `;
