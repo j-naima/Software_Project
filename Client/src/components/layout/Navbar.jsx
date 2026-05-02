@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/slices/authSlice";
 
 const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const { authUser } = useSelector((state) => state.auth);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout()).then(() => {
+      navigate("/login");
+    });
+  };
 
   const getInitials = (name) => {
     return (
@@ -18,7 +28,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   };
 
   return (
-    <nav className="bg-white shadow-sm border-b border-slate-200 fixed w-full top-0 z-30">
+    <nav className="bg-[#0a0f0d] border-b border-[rgba(0,229,96,0.15)] fixed w-full top-0 z-30">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Left side */}
@@ -26,7 +36,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
             {/* Sidebar toggle */}
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-2 rounded-lg text-[#5a8a72] hover:bg-[rgba(0,229,96,0.08)] focus:outline-none focus:ring-2 focus:ring-[rgba(0,229,96,0.5)]"
             >
               <svg
                 className="w-5 h-5"
@@ -55,9 +65,9 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
             {/* Logo and title */}
             <div className="flex items-center ml-4">
               <div className="flex-shrink-0 flex items-center">
-                <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-[#00e560] rounded-lg flex items-center justify-center">
                   <svg
-                    className="w-5 h-5 text-white"
+                    className="w-5 h-5 text-[#0a0f0d]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -71,8 +81,8 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
                   </svg>
                 </div>
                 <div className="ml-3 hidden sm:block">
-                  <h1 className="text-lg font-semibold text-slate-800">
-                    Final Year Project Management System
+                  <h1 className="text-lg font-semibold text-[#c8f5e0]">
+                    AcadTrack - Project Management System
                   </h1>
                 </div>
               </div>
@@ -85,23 +95,23 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
             <div className="relative">
               <button
                 onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                className="flex items-center space-x-3 p-2 rounded-lg hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex items-center space-x-3 p-2 rounded-lg hover:bg-[rgba(0,229,96,0.08)] focus:outline-none focus:ring-2 focus:ring-[rgba(0,229,96,0.5)]"
               >
-                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                  <span className="text-sm font-medium text-white">
+                <div className="w-8 h-8 bg-[#00e560] rounded-full flex items-center justify-center">
+                  <span className="text-sm font-bold text-[#0a0f0d]">
                     {getInitials(authUser?.name)}
                   </span>
                 </div>
                 <div className="hidden sm:block">
-                  <p className="text-sm font-medium text-slate-800">
+                  <p className="text-sm font-medium text-[#c8f5e0]">
                     {authUser?.name}
                   </p>
-                  <p className="text-xs text-slate-500 capitalize">
+                  <p className="text-xs text-[#5a8a72] capitalize">
                     {authUser?.role}
                   </p>
                 </div>
                 <svg
-                  className="w-4 h-4 text-slate-600"
+                  className="w-4 h-4 text-[#5a8a72]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -117,20 +127,23 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
 
               {/* Profile dropdown menu */}
               {profileDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-200 z-50">
+                <div className="absolute right-0 mt-2 w-48 bg-[#111a15] rounded-lg shadow-lg border border-[rgba(0,229,96,0.25)] z-50">
                   <div className="p-2">
-                    <div className="px-3 py-2 border-b border-slate-200">
-                      <p className="text-sm font-medium text-slate-800">
+                    <div className="px-3 py-2 border-b border-[rgba(0,229,96,0.15)]">
+                      <p className="text-sm font-medium text-[#c8f5e0]">
                         {authUser?.name}
                       </p>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-[#5a8a72]">
                         {authUser?.email}
                       </p>
-                      <p className="text-xs text-blue-600 capitalize font-medium mt-1">
+                      <p className="text-xs text-[#00e560] capitalize font-medium mt-1">
                         {authUser?.role}
                       </p>
                     </div>
-                    <button className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md mt-2">
+                    <button
+                      className="w-full text-left px-3 py-2 text-sm text-[#f47373] hover:bg-[rgba(244,115,115,0.1)] rounded-md mt-2"
+                      onClick={handleLogout}
+                    >
                       Sign out
                     </button>
                   </div>
@@ -141,7 +154,6 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
         </div>
       </div>
 
-      {/* Click outside handlers */}
       {(profileDropdownOpen || notificationsOpen) && (
         <div
           className="fixed inset-0 z-40"

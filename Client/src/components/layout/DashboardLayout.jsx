@@ -7,8 +7,7 @@ const DashboardLayout = ({ userRole }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-[66px]">
-      {/* Navbar */}
+    <div className="min-h-screen bg-[#0a0f0d] pt-[66px]">
       <Navbar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
@@ -16,16 +15,14 @@ const DashboardLayout = ({ userRole }) => {
       />
 
       <div className="flex">
-        {/* Sidebar */}
         <Sidebar
           open={sidebarOpen}
           setOpen={setSidebarOpen}
           userRole={userRole}
         />
 
-        {/* Main Content */}
         <main
-          className={`flex-1 transition-all duration-300 ${
+          className={`flex-1 transition-all duration-300 text-[#c8f5e0] ${
             sidebarOpen ? "lg:ml-64" : "lg:ml-20"
           }`}
         >
@@ -35,7 +32,6 @@ const DashboardLayout = ({ userRole }) => {
         </main>
       </div>
 
-      {/* Mobile overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
