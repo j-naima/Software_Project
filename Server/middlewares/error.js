@@ -18,12 +18,10 @@ export const errorMiddleware = (err, req, res, next) => {
     const message = "JSON Web Token is invalid, try again";
     err = new ErrorHandler(message, 400);
   }
-
   if (err.name === "TokenExpiredError") {
     const message = "Json Web Token is expired, try again";
     err = new ErrorHandler(message, 400);
   }
-
   if (err.name === "CastError") {
     const message = "Resource not found. Invalid: " + err.path;
     err = new ErrorHandler(message, 400);
