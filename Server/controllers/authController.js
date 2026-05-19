@@ -5,20 +5,16 @@ import { sendEmail } from "../services/emailService.js";
 import { generateForgotPasswordEmailTemplate } from "../utils/emailTemplates.js";
 import { generateToken } from "../utils/generateToken.js";
 import crypto from "crypto";
-
+// REGISTER USER
 export const registerUser = asyncHandler(async (req, res, next) => {
   const { name, email, password, role } = req.body;
-
   if (!name || !email || !password || !role) {
     return next(new ErrorHandler("Please provide all required fields", 400));
   }
-
   let user = await User.findOne({ email });
-
   if (user) {
     return next(new ErrorHandler("User already exists", 400));
   }
-
   user = new User({ name, email, password, role });
   await user.save();
   generateToken(user, 201, "User registered successfully", res);
@@ -26,19 +22,14 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 
 export const login = asyncHandler(async (req, res, next) => {
   const { email, password, role } = req.body;
-
   if (!email || !password || !role) {
     return next(new ErrorHandler("Please provide all required fields", 400));
   }
-
   const user = await User.findOne({ email, role }).select("+password");
-
   if (!user) {
     return next(new ErrorHandler("Invalid email, password or role", 401));
   }
-
   const isPasswordMatched = await user.comparePassword(password);
-
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Invalid email, password or role", 401));
   }
@@ -84,7 +75,7 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
   try {
     await sendEmail({
       to: user.email,
-      subject: "FYP SYSTEM - 🔐 Password Reset Request",
+      subject: "AcadTrack - 🔐 Password Reset Request",
       message,
     });
     res.status(200).json({
@@ -110,17 +101,14 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
     resetPasswordToken,
     resetPasswordExpire: { $gt: Date.now() },
   });
-
   if (!user) {
     return next(
       new ErrorHandler("Invalid or expired password reset token", 400),
     );
   }
-
   if (!req.body.password || !req.body.confirmPassword) {
     return next(new ErrorHandler("Please provide all required fields", 400));
   }
-
   if (req.body.password !== req.body.confirmPassword) {
     return next(
       new ErrorHandler("Password and Confirm Password do not match", 400),
