@@ -69,12 +69,24 @@ Each object must have exactly these keys:
 
 async function callGemini(systemPrompt, userMessage) {
   const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-  const models = ["gemini-2.0-flash", "gemini-flash-latest"];
+  if (!API_KEY) {
+    throw new Error(
+      "Gemini API key not found. Please check your environment variables.",
+    );
+  }
 
+  // Only use models that are confirmed to work with v1beta
+  const models = [
+    "gemini-2.0-flash",
+    "gemini-1.5-flash",
+    "gemini-flash-latest",
+  ];
   let lastError = null;
 
   for (const model of models) {
     try {
+      console.log(`Trying model: ${model}`); // Debug log
+
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${API_KEY}`,
         {
@@ -86,7 +98,6 @@ async function callGemini(systemPrompt, userMessage) {
             generationConfig: {
               temperature: 0.2,
               maxOutputTokens: 2048,
-              responseMimeType: "application/json",
             },
           }),
         },
@@ -94,14 +105,32 @@ async function callGemini(systemPrompt, userMessage) {
 
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
-        throw new Error(errData.error?.message || `HTTP ${response.status}`);
+        const errorMsg = errData.error?.message || `HTTP ${response.status}`;
+        console.error(`Model ${model} failed:`, errorMsg);
+        lastError = new Error(errorMsg);
+        continue; // Try next model
       }
 
       const data = await response.json();
       const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
-      if (!raw) throw new Error("Empty response from model.");
-      return parseJSON(raw);
+
+      if (!raw) {
+        console.error(`Model ${model} returned empty response`);
+        lastError = new Error("Empty response from model.");
+        continue;
+      }
+
+      console.log(
+        "Raw response from",
+        model,
+        ":",
+        raw.substring(0, 200) + "...",
+      ); // Debug log
+      const parsed = parseJSON(raw);
+      console.log("Successfully parsed result:", parsed.length, "items"); // Debug log
+      return parsed;
     } catch (e) {
+      console.error(`Error with model ${model}:`, e);
       lastError = e;
     }
   }
@@ -110,25 +139,49 @@ async function callGemini(systemPrompt, userMessage) {
 }
 
 function parseJSON(raw) {
+  // Clean the raw text
   let text = raw
     .replace(/^```json\s*/i, "")
     .replace(/^```\s*/i, "")
     .replace(/```\s*$/i, "")
     .trim();
 
+  // Try direct parsing first
   try {
-    return JSON.parse(text);
+    const parsed = JSON.parse(text);
+    if (Array.isArray(parsed)) return parsed;
+    if (parsed.results && Array.isArray(parsed.results)) return parsed.results;
+    if (parsed.data && Array.isArray(parsed.data)) return parsed.data;
   } catch (_) {}
 
+  // Try to extract JSON array from the text
   const arrMatch = text.match(/\[[\s\S]*\]/);
   if (arrMatch) {
     try {
       return JSON.parse(arrMatch[0]);
-    } catch (_) {}
-    const fixed = arrMatch[0].replace(/,\s*([}\]])/g, "$1");
-    try {
-      return JSON.parse(fixed);
-    } catch (_) {}
+    } catch (_) {
+      let fixed = arrMatch[0]
+        .replace(/,\s*([}\]])/g, "$1") 
+        .replace(/([{,]\s*)(\w+)(\s*:)/g, '$1"$2"$3') 
+        .replace(/:\s*'([^']*)'/g, ':"$1"'); 
+
+      try {
+        return JSON.parse(fixed);
+      } catch (_) {
+        const objects = arrMatch[0].match(/\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/g);
+        if (objects) {
+          const results = [];
+          for (const obj of objects) {
+            try {
+              results.push(JSON.parse(obj));
+            } catch (_) {
+              // Skip invalid objects
+            }
+          }
+          if (results.length > 0) return results;
+        }
+      }
+    }
   }
 
   throw new Error("Could not parse AI response. Please try again.");
