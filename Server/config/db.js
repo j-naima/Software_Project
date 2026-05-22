@@ -6,9 +6,9 @@ export const connectDB = async () => {
       dbName: "swe_lab_project",
     })
     .then(() => {
-      console.log("Connected to MongoDB Databse");
+      console.log("Connected to database.");
     })
-    .catch((error) => {
-      console.error("Error connecting to MongoDB:", error);
+    .catch((err) => {
+      console.log("Database connection failed.", err);
     });
 };
