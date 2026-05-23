@@ -3,23 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProject, getFeedback } from "../../store/slices/studentSlice";
 import { AlertTriangle, BadgeCheck, MessageCircle } from "lucide-react";
 
-
 const FeedbackPage = () => {
   const dispatch = useDispatch();
   const { project, feedback } = useSelector((state) => state.student);
 
-
   useEffect(() => {
     dispatch(fetchProject());
   }, [dispatch]);
-
 
   useEffect(() => {
     if (project?._id) {
       dispatch(getFeedback(project._id));
     }
   }, [dispatch, project]);
-
 
   const getFeedbackIcon = (type) => {
     if (type === "positive") {
@@ -30,7 +26,6 @@ const FeedbackPage = () => {
     }
     return <MessageCircle className="w-6 h-6 text-[#00e560]" />;
   };
-
 
   const feedbackStats = [
     {
@@ -58,7 +53,6 @@ const FeedbackPage = () => {
     },
   ];
 
-
   return (
     <div className="space-y-6">
       <div className="card">
@@ -69,7 +63,6 @@ const FeedbackPage = () => {
           </p>
         </div>
       </div>
-
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         {feedbackStats.map((item, i) => (
@@ -90,7 +83,6 @@ const FeedbackPage = () => {
           </div>
         ))}
       </div>
-
 
       <div className="space-y-4">
         {feedback && feedback.length > 0 ? (
@@ -115,7 +107,6 @@ const FeedbackPage = () => {
                 </div>
               </div>
 
-
               <div className="bg-[#0c1210] rounded-xl p-3 border border-[rgba(0,229,96,0.1)]">
                 <p className="text-[#7ab898] text-sm leading-relaxed">
                   {f.message}
@@ -134,11 +125,4 @@ const FeedbackPage = () => {
   );
 };
 
-
 export default FeedbackPage;
-
-
-
-
-
-

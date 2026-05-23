@@ -20,22 +20,18 @@ import {
   BellOff,
 } from "lucide-react";
 
-
 const NotificationsPage = () => {
   const dispatch = useDispatch();
   const notifications = useSelector((state) => state.notification.list);
   const unreadCount = useSelector((state) => state.notification.unreadCount);
 
-
   useEffect(() => {
     dispatch(getNotifications());
   }, [dispatch]);
 
-
   const markAsReadHandler = (id) => dispatch(markAsRead(id));
   const markAllAsReadHandler = () => dispatch(markAllAsRead());
   const deleteNotificationHandler = (id) => dispatch(deleteNotification(id));
-
 
   const getNotificationIcon = (type) => {
     switch (type) {
@@ -59,7 +55,6 @@ const NotificationsPage = () => {
     }
   };
 
-
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
     const now = new Date();
@@ -68,7 +63,6 @@ const NotificationsPage = () => {
     const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-
     if (diffMinutes < 1) return "Just now";
     if (diffMinutes < 60) return `${diffMinutes} min ago`;
     if (diffHours < 24) return `${diffHours} hrs ago`;
@@ -76,7 +70,6 @@ const NotificationsPage = () => {
     if (diffDays <= 7) return `${diffDays} days ago`;
     return date.toLocaleDateString();
   };
-
 
   const stats = [
     {
@@ -118,7 +111,6 @@ const NotificationsPage = () => {
     },
   ];
 
-
   return (
     <div className="space-y-6">
       <div className="card">
@@ -141,7 +133,6 @@ const NotificationsPage = () => {
           </div>
         </div>
 
-
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           {stats.map((item, i) => (
             <div key={i} className={`card ${item.border}`}>
@@ -162,7 +153,6 @@ const NotificationsPage = () => {
           ))}
         </div>
 
-
         <div className="space-y-3">
           {notifications.map((notification) => (
             <div
@@ -178,7 +168,6 @@ const NotificationsPage = () => {
                   {getNotificationIcon(notification.type)}
                 </div>
 
-
                 <div className="flex-1 min-w-0 space-y-3">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center gap-2">
@@ -191,7 +180,6 @@ const NotificationsPage = () => {
                         <span className="w-2 h-2 rounded-full bg-[#00e560]" />
                       )}
                     </div>
-
 
                     <div className="flex items-center gap-2 shrink-0">
                       <span className="text-xs text-[#5a8a72]">
@@ -211,11 +199,9 @@ const NotificationsPage = () => {
                     </div>
                   </div>
 
-
                   <p className="text-sm text-[#7ab898] leading-relaxed">
                     {notification.message}
                   </p>
-
 
                   <div className="flex items-center justify-between">
                     <span
@@ -233,7 +219,6 @@ const NotificationsPage = () => {
                     >
                       {notification.type}
                     </span>
-
 
                     <div className="flex items-center gap-3">
                       {!notification.isRead && (
@@ -260,7 +245,6 @@ const NotificationsPage = () => {
           ))}
         </div>
 
-
         {notifications.length === 0 && (
           <div className="text-center py-8">
             <div className="flex items-center justify-center mb-3">
@@ -274,10 +258,4 @@ const NotificationsPage = () => {
   );
 };
 
-
 export default NotificationsPage;
-
-
-
-
-
