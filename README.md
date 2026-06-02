@@ -3,7 +3,6 @@
 
 <div align="center">
 
-# 📋 Project Management System
 
 ### A Modern MERN Stack-Based Project Collaboration Platform
 
