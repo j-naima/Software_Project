@@ -32,20 +32,20 @@ The application aims to simplify project execution by providing project tracking
 
 ## ✨ Key Features
 
-### 👤 User Management
+### 👤 User Management(Student)
 - User Registration & Login
 - Secure Authentication
 - Role-Based Access Control
 - User Profile Management
 
-### 📂 Project Management
+### 📂 Project Management(Supervisor)
 - Create New Projects
 - Update Project Details
 - Project Categorization
 - Project Progress Tracking
 - Project Status Monitoring
 
-### ✅ Task Management
+### ✅ Task Management(Admin)
 - Create Tasks
 - Assign Tasks to Team Members
 - Update Task Status
@@ -154,73 +154,7 @@ Project-261/
 
 
 
-## ⚙️ Installation Guide
 
-### Step 1: Clone Repository
-
-```bash
-git clone https://github.com/your-username/project-261.git
-```
-
-### Step 2: Move into Project Directory
-
-```bash
-cd project-261
-```
-
----
-
-## 📦 Backend Setup
-
-```bash
-cd server
-npm install
-```
-
-Create a `.env` file inside the server directory:
-
-```env
-PORT=5000
-
-MONGO_URI=your_mongodb_connection_string
-
-JWT_SECRET=your_jwt_secret_key
-```
-
-Start Backend Server:
-
-```bash
-npm run dev
-```
-
----
-
-## 🎨 Frontend Setup
-
-```bash
-cd client
-npm install
-```
-
-Run Frontend:
-
-```bash
-npm start
-```
-
-Frontend runs on:
-
-```bash
-http://localhost:3000
-```
-
-Backend runs on:
-
-```bash
-http://localhost:5000
-```
-
----
 
 ## 📊 Core Modules
 
