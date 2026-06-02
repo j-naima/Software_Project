@@ -220,6 +220,3 @@ This project is developed for academic and educational purposes.
 **Built with MERN Stack ❤️**
 
 </div>
-````
-
-This version is ready to paste directly into your `README.md` file on GitHub.
