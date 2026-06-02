@@ -216,10 +216,7 @@ Project-261/
 
 - Real-Time Chat System
 - Team Discussion Board
-- File Sharing Module
-- AI-Based Task Recommendations
 - Project Risk Prediction
-- Email Notifications
 - Mobile Application Support
 
 ---
