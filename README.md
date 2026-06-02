@@ -46,7 +46,7 @@ The application aims to simplify project execution by providing project tracking
 
 ### ✅ Task Management(Admin)
 - Create Tasks
-- Assign Tasks to Team Members
+- Assign Tasks to Team Members and supervisors
 - Update Task Status
 - Set Task Priorities
 - Deadline Management
@@ -116,42 +116,6 @@ The application aims to simplify project execution by providing project tracking
 - GitHub
 - Postman
 - VS Code
-
----
-
-## 📂 Project Structure
-
-Project-261/
-│
-├── client/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── hooks/
-│   │   ├── services/
-│   │   ├── context/
-│   │   └── assets/
-│   │
-│   └── package.json
-│
-├── server/
-│   ├── config/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   ├── utils/
-│   └── server.js
-│
-├── screenshots/
-├── docs/
-├── README.md
-└── .gitignore
-
-
-
-
 
 
 ## 📊 Core Modules
