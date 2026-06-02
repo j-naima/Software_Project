@@ -12,10 +12,6 @@
 ![React](https://img.shields.io/badge/React-Frontend-blue?style=for-the-badge&logo=react)
 ![Node.js](https://img.shields.io/badge/Node.js-Runtime-green?style=for-the-badge&logo=node.js)
 
-![GitHub last commit](https://img.shields.io/github/last-commit/USERNAME/PROJECT-261?style=for-the-badge)
-![GitHub repo size](https://img.shields.io/github/repo-size/USERNAME/PROJECT-261?style=for-the-badge)
-![GitHub stars](https://img.shields.io/github/stars/USERNAME/PROJECT-261?style=for-the-badge)
-
 ### 📌 Efficient Project Planning, Tracking & Team Collaboration
 
 </div>
@@ -37,6 +33,8 @@ The application aims to simplify project execution by providing project tracking
 - Secure Authentication
 - Role-Based Access Control
 - User Profile Management
+- File Submission
+- Career guideline from AI
 
 ### 📂 Project Management(Supervisor)
 - Create New Projects
@@ -44,6 +42,7 @@ The application aims to simplify project execution by providing project tracking
 - Project Categorization
 - Project Progress Tracking
 - Project Status Monitoring
+- Presentation date fixation
 
 ### ✅ Task Management(Admin)
 - Create Tasks
@@ -63,7 +62,6 @@ The application aims to simplify project execution by providing project tracking
 - Project Update Notifications
 - Deadline Reminders
 
----
 
 ## 🏗️ System Architecture
 
