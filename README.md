@@ -142,28 +142,6 @@ The application aims to simplify project execution by providing project tracking
 
 ---
 
-## 📸 Screenshots
-
-### Dashboard
-
-```text
-[ Dashboard Screenshot Here ]
-```
-
-### Project Management
-
-```text
-[ Project Module Screenshot Here ]
-```
-
-### Task Management
-
-```text
-[ Task Module Screenshot Here ]
-```
-
----
-
 ## 🎯 Project Objectives
 
 - Improve project planning and execution.
